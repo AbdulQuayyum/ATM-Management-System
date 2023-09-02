@@ -1,6 +1,6 @@
-# ATM Management System
+## ATM Management System
 
-Basic functionalities
+# Basic functionalities
 
 • User has to enter Account number or Password
 
@@ -26,7 +26,8 @@ Deletes the account of the user
 Shows the Balance in the account.
 
 
-Available Users
+# Available Users
+
 • Name: Usman Ismaeel-Awwal, Account Number: 1111, Account Pin: 1111
 
 • Name: Ayinla Akerekoro, Account Number: 2222, Account Pin: 2222
