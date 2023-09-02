@@ -26,4 +26,9 @@ Deletes the account of the user
 Shows the Balance in the account.
 
 
+Available Users
+Name: Usman Ismaeel-Awwal, Account Number: 1111, Account Pin: 1111
+Name: Ayinla Akerekoro, Account Number: 2222, Account Pin: 2222
+Name: Ajani Ajanlekoko, Account Number: 3333, Account Pin: 3333
+
 ## Version 1.0
