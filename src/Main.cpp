@@ -20,6 +20,73 @@ void DisplayAccount(const Account &account)
   std::cout << "Account Balance: ₦" << account.Balance << std::endl;
 }
 
+// Function to perform deposit
+void Deposit(Account &account)
+{
+  double DepositAmount;
+  std::cout << "Enter the amount to deposit: ₦";
+  std::cin >> DepositAmount;
+  if (DepositAmount > 0)
+  {
+    account.Balance += DepositAmount;
+    std::cout << "Deposit successful. Updated balance: ₦" << account.Balance << std::endl;
+  }
+  else
+  {
+    std::cout << "Invalid deposit amount." << std::endl;
+  }
+}
+
+// Function to perform withdrawal
+void Withdraw(Account &account)
+{
+  double WithdrawAmount;
+  std::cout << "Enter the amount to withdraw: ₦";
+  std::cin >> WithdrawAmount;
+  if (WithdrawAmount > 0 && WithdrawAmount <= account.Balance)
+  {
+    account.Balance -= WithdrawAmount;
+    std::cout << "Withdrawal successful. Updated balance: ₦" << account.Balance << std::endl;
+  }
+  else
+  {
+    std::cout << "Invalid withdrawal amount or insufficient funds." << std::endl;
+  }
+}
+
+// Function to change PIN
+void ChangePin(Account &account)
+{
+  int newPin;
+  std::cout << "Enter your new PIN: ";
+  std::cin >> newPin;
+  account.Pin = newPin;
+  std::cout << "PIN changed successfully." << std::endl;
+}
+
+// Function to display the main menu
+int DisplayMenu()
+{
+  int choice;
+  std::cout << "************************************** Menu **************************************" << std::endl;
+  std::cout << "1. Account Enquiry" << std::endl;
+  std::cout << "2. Deposit Money" << std::endl;
+  std::cout << "3. Withdraw Money" << std::endl;
+  std::cout << "4. Change PIN" << std::endl;
+  std::cout << "5. Close" << std::endl;
+  std::cout << "Enter your choice (1-5): ";
+  std::cin >> choice;
+
+  if (std::cin.fail())
+  {
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    return -1; // Indicates an error
+  }
+
+  return choice;
+}
+
 int main()
 {
   // An array of Accounts
@@ -59,62 +126,23 @@ int main()
     int choice;
     do
     {
-      std::cout << "************************************** Menu **************************************" << std::endl;
-      std::cout << "1. Account Enquiry" << std::endl;
-      std::cout << "2. Deposit Money" << std::endl;
-      std::cout << "3. Withdraw Money" << std::endl;
-      std::cout << "4. Change PIN" << std::endl;
-      std::cout << "5. Close" << std::endl;
-      std::cout << "Enter your choice (1-5): ";
-      std::cin >> choice;
-
-      if (std::cin.fail())
-      {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Invalid input. Please enter a valid choice (1-5)." << std::endl;
-        continue;
-      }
+      choice = DisplayMenu();
 
       switch (choice)
       {
       case 1:
-        // Account Enquiry
         DisplayAccount(FoundAccount);
         break;
       case 2:
-        // Deposit Money
-        double DepositAmount;
-        std::cout << "Enter the amount to deposit: ₦";
-        std::cin >> DepositAmount;
-        FoundAccount.Balance += DepositAmount;
-        std::cout << "Deposit successful. Updated balance: ₦" << FoundAccount.Balance << std::endl;
+        Deposit(FoundAccount);
         break;
       case 3:
-        // Withdraw Money
-        double WithdrawAmount;
-        std::cout << "Enter the amount to withdraw: ₦";
-        std::cin >> WithdrawAmount;
-        if (WithdrawAmount <= FoundAccount.Balance)
-        {
-          FoundAccount.Balance -= WithdrawAmount;
-          std::cout << "Withdrawal successful. Updated balance: ₦" << FoundAccount.Balance << std::endl;
-        }
-        else
-        {
-          std::cout << "Insufficient funds. Withdrawal failed." << std::endl;
-        }
+        Withdraw(FoundAccount);
         break;
       case 4:
-        // Change PIN
-        int newPin;
-        std::cout << "Enter your new PIN: ";
-        std::cin >> newPin;
-        FoundAccount.Pin = newPin;
-        std::cout << "PIN changed successfully." << std::endl;
+        ChangePin(FoundAccount);
         break;
       case 5:
-        // Close
         std::cout << "Thank you for using the ATM. Goodbye!" << std::endl;
         break;
       default:
